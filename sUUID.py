@@ -44,8 +44,8 @@ class LuhnUUID(object):
 
 
     def calculate_uuid(self):
-        self.UUID =  str(int(time.time())) + ''.join(map(
+        self.UUID = str(int(time.time())) + ''.join(map(
             str, [random.randint(0,9) for _ in xrange(5)]
         ))
-        check_digit = self.luhn_checksum(self.UUID * 10)
+        check_digit = self.luhn_checksum(int(self.UUID) * 10)
         return self.UUID + str(check_digit) if check_digit == 0 else self.UUID + str(10 - check_digit)
